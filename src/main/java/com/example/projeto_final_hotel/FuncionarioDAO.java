@@ -33,4 +33,23 @@ public class FuncionarioDAO {
         }
         return funcionarios;
         }
+
+        public static void removerFuncionario(int idFun){
+        Connection conn = ConexaoBD.openDB();
+        PreparedStatement stmt = null;
+
+        String sql = "DELETE FROM Funcionario WHERE idFun = ?;";
+
+        try{
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idFun);
+            stmt.executeUpdate();
+            System.out.println("Funcionario removido com sucesso!");
+        }catch (Exception ex){
+            System.out.println("Erro ao remover o Funcionario" + ex);
+        }finally {
+            ConexaoBD.closeDB();
+        }
+        }
+
     }

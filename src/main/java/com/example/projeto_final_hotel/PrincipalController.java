@@ -106,8 +106,7 @@ public class PrincipalController implements Initializable {
     private TableView ReservaTableView;
     @FXML
     private TableColumn IDReservaCollumn;
-    @FXML
-    private TableColumn IdQuartoCollumn;
+
     @FXML
     private TableColumn NomeReservaCollumn;
     @FXML
@@ -128,10 +127,7 @@ public class PrincipalController implements Initializable {
     private AnchorPane QuartosDisponiveisForm;
     @FXML
     private Button addFunBtn;
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private Statement statement;
-    private ResultSet resultSet;
+
     //------------------------------------------------------------------------------------------------
 
     public String type[] = {"Um Quarto", "Dois Quartos", "Três Quartos", "Quatro Quartos"};
@@ -182,8 +178,8 @@ public class PrincipalController implements Initializable {
         roomStatusCollum.setCellValueFactory(new PropertyValueFactory<QuartosDisponiveis, String>("status"));
         roomPriceCollum.setCellValueFactory(new PropertyValueFactory<QuartosDisponiveis, Double>("preco"));
 
-
         tableViewQuartos.setItems(QuartosDisponiveisDAO.listarQuartos());
+        tableViewQuartos.refresh();
     }
 
     public void listarFuncionarios(){
@@ -197,15 +193,17 @@ public class PrincipalController implements Initializable {
 
     }
 
+
     public void listarReserva(){
         IDReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, Integer>("idReserva"));
-        IdQuartoCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, Integer>("IdQuarto"));
         NomeReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, String>("nome"));
         NumberPhoneReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, String>("telefone"));
         EmailReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, String>("email"));
-        CheckInReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, Date>("checkIn"));
-        CheckOutReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, Date>("checkOut"));
-        ReservaTableView.setItems(Settings.getListaReserva());
+        CheckInReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, LocalDate>("dataEntrada"));
+        CheckOutReservaCollumn.setCellValueFactory(new PropertyValueFactory<Reserva, LocalDate>("dataSaida"));
+
+        ReservaTableView.setItems(ReservaDAO.listarReserva());
+
     }
 
     //------------------------------------------------------------------------------------------------
@@ -217,6 +215,7 @@ public class PrincipalController implements Initializable {
         FuncionariosForm.setVisible(false);
         ReservaForm.setVisible(false);
         aboutForm.setVisible(false);
+        ListarQuartos();
     }
 
     public void buttonFunFormOnAction(ActionEvent actionEvent) {
@@ -224,13 +223,17 @@ public class PrincipalController implements Initializable {
         FuncionariosForm.setVisible(true);
         ReservaForm.setVisible(false);
         aboutForm.setVisible(false);
+        Settings.getListaQuartos().clear();
+
     }
 
-    public void buttonReservaFormOnAaction(ActionEvent actionEvent) {
+    public void buttonReservaFormOnAction(ActionEvent actionEvent) {
         QuartosDisponiveisForm.setVisible(false);
         FuncionariosForm.setVisible(false);
         ReservaForm.setVisible(true);
         aboutForm.setVisible(false);
+        Settings.getListaQuartos().clear();
+
     }
 
     public void buttonAcercaDeFormOnAction(ActionEvent actionEvent) {
@@ -238,6 +241,7 @@ public class PrincipalController implements Initializable {
         FuncionariosForm.setVisible(false);
         ReservaForm.setVisible(false);
         aboutForm.setVisible(true);
+        Settings.getListaQuartos().clear();
     }
 
     //------------------------------------------------------------------------------------------------
@@ -406,6 +410,8 @@ public class PrincipalController implements Initializable {
                             QuartosDisponiveis quartos = new QuartosDisponiveis(gerarID, numQuarto, tipo, status, preco);
                             tableViewQuartos.getItems().add(quartos);
 
+
+
                             roomNumber.clear();
                             roomType.getSelectionModel().clearSelection();
                             roomStatus.getSelectionModel().clearSelection();
@@ -499,7 +505,7 @@ public class PrincipalController implements Initializable {
                                 alertQuartoEdit.showAndWait();
                                 Settings.setEditarQuarto(null);
 
-                                tableViewQuartos.refresh(); // Atualização da TableView
+                                tableViewQuartos.refresh();
 
                                 // Limpar os campos
                                 roomNumber.clear();
@@ -545,6 +551,8 @@ public class PrincipalController implements Initializable {
         roomStatus.getSelectionModel().clearSelection();
         roomType.getSelectionModel().clearSelection();;
         roomPrice.setText("");
+
+
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
@@ -610,6 +618,7 @@ public class PrincipalController implements Initializable {
         back.setScene(new Scene(scene));
         Window window = checkInBtn.getScene().getWindow();
         back.show();
+
     }
     //------------------------------------------------------------------------------------------------
 
@@ -621,6 +630,7 @@ public class PrincipalController implements Initializable {
         roomStatus.setValue(RoomDataVer.getStatus());
         roomPrice.setText(String.valueOf(RoomDataVer.getPreco()));
     }
+
 
     public void procurarQuarto(KeyEvent keyEvent) {
         FilteredList<QuartosDisponiveis> filter = new FilteredList<>(Settings.listaQuartos, e -> true);
@@ -654,7 +664,7 @@ public class PrincipalController implements Initializable {
     //------------------------------------------------------------------------------------------------
     
     public void btnAddFunOnAction(ActionEvent actionEvent){
-        if(funcionariosId.getText().isEmpty() || funcionariosFirstName.getText().isEmpty() || funcionariosSecondName.getText().isEmpty() || funcionarioAge.getValue() == null || funcionarioCargo.getSelectionModel().getSelectedItem() == null){
+        if(funcionariosFirstName.getText().isEmpty() || funcionariosSecondName.getText().isEmpty() || funcionarioAge.getValue() == null || funcionarioCargo.getSelectionModel().getSelectedItem() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
             alert.setHeaderText(null);
@@ -663,13 +673,13 @@ public class PrincipalController implements Initializable {
         } else {
             try{
                 Connection conn = ConexaoBD.openDB();
-                if(conn == null) {
+                if(conn != null) {
                     String primeiroNome = String.valueOf(funcionariosFirstName.getText());
                     String segundoNome = String.valueOf(funcionariosSecondName.getText());
                     LocalDate idade = LocalDate.parse(String.valueOf(funcionarioAge.getValue()));
                     String cargo = String.valueOf(funcionarioCargo.getSelectionModel().getSelectedItem());
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("CONFIRMAÇÃO");
                     alert.setHeaderText("Deseja mesmo adicionar?");
                     alert.setContentText("Primeiro nome: " + primeiroNome + "\nSegundo nome: " + segundoNome + "\nIdade: " + idade + "\nCargo:  " + cargo);
@@ -685,20 +695,21 @@ public class PrincipalController implements Initializable {
                         stmt.setString(2, segundoNome);
                         stmt.setDate(3, java.sql.Date.valueOf(idade));
                         stmt.setString(4, cargo);
+                        stmt.executeUpdate();
 
                         int gerarID = -1;
                         ResultSet gerarKey = stmt.getGeneratedKeys();
                         if (gerarKey.next()) {
                             gerarID = gerarKey.getInt(1);
                         }
-                        Alert alertAddFun = new Alert(Alert.AlertType.INFORMATION);
+                        Alert alertAddFun = new Alert(Alert.AlertType.CONFIRMATION);
                         alertAddFun.setTitle("Informação");
                         alertAddFun.setHeaderText("Funcionario adicionado com sucesso");
                         alertAddFun.setContentText(null);
                         alertAddFun.showAndWait();
 
                         Funcionario f = new Funcionario(gerarID, primeiroNome,segundoNome,idade,cargo);
-                        tableViewQuartos.getItems().add(f);
+                        tableViewFuncionarios.getItems().add(f);
 
                         funcionariosFirstName.clear();
                         funcionariosSecondName.clear();
@@ -732,14 +743,161 @@ public class PrincipalController implements Initializable {
     }
 
     public void buttonEditFunOnAction(ActionEvent actionEvent) {
-    }
+        if (funcionariosFirstName.getText().isEmpty() || funcionariosSecondName.getText().isEmpty() || funcionarioAge.getValue() == null || funcionarioCargo.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO");
+            alert.setHeaderText(null);
+            alert.setContentText("por favor preencha todos os espaços");
+            alert.showAndWait();
+        } else {
+            int novoId = Integer.parseInt(funcionariosId.getText());
+            Funcionario funEdit = null;
 
+            for(Funcionario f : Settings.getListaFuncionarios()){
+                if(f.getIdFun() == novoId){
+                    funEdit = f;
+                    break;
+                }
+            }
+            if(funEdit != null){
+                funEdit.setPrimeiroNome((String) funcionariosFirstName.getText());
+                funEdit.setSegundoNome((String) funcionariosSecondName.getText());
+                funEdit.setDataNascimento(funcionarioAge.getValue());
+                funEdit.setCargo((String) funcionarioCargo.getSelectionModel().getSelectedItem());
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("CONFIRMAÇÃO");
+                alert.setHeaderText("Deseja mesmo editar ?");
+                alert.setContentText(null);
+                ButtonType btnSim = new ButtonType("SIM");
+                ButtonType btnNao = new ButtonType("NÃO");
+                alert.getButtonTypes().setAll(btnSim, btnNao);
+
+                Optional<ButtonType> escolha = alert.showAndWait();
+                if(escolha.isPresent() && escolha.get() == btnSim){
+                    Connection conn = null;
+                    try{
+                        conn = ConexaoBD.openDB();
+                        if(conn != null){
+                            String Atualizar = "UPDATE Funcionario SET primeiroNome = ?, segundoNome = ?, dataNascimento = ?, cargo = ? WHERE idFun = ?;";
+                            PreparedStatement stmt = conn.prepareStatement(Atualizar);
+                            stmt.setString(1, (String) funcionariosFirstName.getText());
+                            stmt.setString(2, (String) funcionariosSecondName.getText());
+                            stmt.setDate(3, java.sql.Date.valueOf(funcionarioAge.getValue()));
+                            stmt.setString(4, (String) funcionarioCargo.getSelectionModel().getSelectedItem());
+                            stmt.setInt(5, novoId);
+                            int atualizarBD = stmt.executeUpdate();
+                            if(atualizarBD > 0){
+                                for (Funcionario f : Settings.getListaFuncionarios()){
+                                    if(f.getIdFun() == funEdit.getIdFun()){
+                                        int forma = Settings.getListaFuncionarios().indexOf(f);
+                                        Settings.getListaFuncionarios().set(forma, funEdit);
+                                        break;
+                                    }
+                                }
+
+                                Alert alertAddFun = new Alert(Alert.AlertType.CONFIRMATION);
+                                alertAddFun.setTitle("Informação");
+                                alertAddFun.setHeaderText("Funcionario adicionado com sucesso");
+                                alertAddFun.setContentText(null);
+                                alertAddFun.showAndWait();
+                                Settings.setEditarFuncionario(null);
+
+                                tableViewFuncionarios.refresh();
+
+                                funcionariosFirstName.clear();
+                                funcionariosSecondName.clear();
+                                funcionarioAge.setValue(null);
+                                funcionarioCargo.getSelectionModel().clearSelection();
+                            }else{
+                                Alert alertEdit = new Alert(Alert.AlertType.ERROR);
+                                alertEdit.setTitle("ERRO!");
+                                alertEdit.setHeaderText("Nao foi possivel atualizar o funcionário na base de dados");
+                                alertEdit.setContentText(null);
+                                alertEdit.showAndWait();
+                            }
+                        } else {
+                            Alert alertEdit = new Alert(Alert.AlertType.ERROR);
+                            alertEdit.setTitle("ERRO!");
+                            alertEdit.setHeaderText("Não foi possível estabelecer uma conexão com a base de dados.");
+                            alertEdit.setContentText(null);
+                            alertEdit.showAndWait();
+                        }
+                    }catch (Exception e){
+                        Alert alertErro = new Alert(Alert.AlertType.ERROR);
+                        alertErro.setTitle("ERRO");
+                        alertErro.setHeaderText("Erro ao adicionar o Funcionário: " + e.getMessage());
+                        alertErro.showAndWait();
+                    }finally {
+                        if(conn != null){
+                            try{
+                                conn.close();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public void buttonClearFunOnAction(ActionEvent actionEvent) {
+        funcionariosFirstName.setText("");
+        funcionariosSecondName.setText("");
+        funcionarioAge.setValue(null);
+        funcionarioCargo.getSelectionModel().clearSelection();
     }
 
-
     public void buttonDeleteFunOnAction(ActionEvent actionEvent) {
+        if(funcionariosFirstName.getText().isEmpty() || funcionariosSecondName.getText().isEmpty() || funcionarioAge.getValue() == null || funcionarioCargo.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO");
+            alert.setHeaderText(null);
+            alert.setContentText("por favor preencha todos os espaços");
+            alert.showAndWait();
+        } else {
+            Connection conn = ConexaoBD.openDB();
+            if(conn != null){
+                String primeiroNome = String.valueOf(funcionariosFirstName.getText());
+                String segundoNome = String.valueOf(funcionariosSecondName.getText());
+                LocalDate idade = LocalDate.parse(String.valueOf(funcionarioAge.getValue()));
+                String cargo = String.valueOf(funcionarioCargo.getSelectionModel().getSelectedItem());
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("CONFIRMAÇÃO");
+                alert.setHeaderText("Deseja mesmo adicionar?");
+                alert.setContentText("Primeiro nome: " + primeiroNome + "\nSegundo nome: " + segundoNome + "\nIdade: " + idade + "\nCargo:  " + cargo);
+                ButtonType btnSim = new ButtonType("SIM");
+                ButtonType btnNao = new ButtonType("NÃO");
+                alert.getButtonTypes().setAll(btnSim, btnNao);
+
+                Optional<ButtonType> escolha = alert.showAndWait();
+                if(escolha.isPresent() && escolha.get() == btnSim){
+                    int removerID = Integer.parseInt(funcionariosId.getText());
+                    FuncionarioDAO.removerFuncionario(removerID);
+                    Funcionario fun = (Funcionario) tableViewFuncionarios.getSelectionModel().getSelectedItem();
+                    tableViewFuncionarios.getItems().remove(fun);
+
+                    funcionariosFirstName.clear();
+                    funcionariosSecondName.clear();
+                    funcionarioAge.setValue(null);
+                    funcionarioCargo.getSelectionModel().clearSelection();
+
+                    Alert alertRmFun = new Alert(Alert.AlertType.INFORMATION);
+                    alertRmFun.setTitle("INFORMAÇÃO");
+                    alertRmFun.setHeaderText("Funcionário removido com sucesso!!");
+                    alertRmFun.setContentText(null);
+                    alertRmFun.showAndWait();
+                }
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Nao foi possivel estabelecer uma conexão com a base de dados");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        }
     }
 
 
@@ -762,7 +920,9 @@ public class PrincipalController implements Initializable {
     }
     //------------------------------------------------------------------------------------------------
 
+
     public void buttonDeleteReservaOnAction(ActionEvent actionEvent) {
+
     }
 
     //------------------------------------------------------------------------------------------------
@@ -776,12 +936,11 @@ public class PrincipalController implements Initializable {
         QuartosDisponiveisRoomType();
         QuartosDisponiveisRoomStatus();
         FuncionariosCargos();
-        ListarQuartos();
         listarFuncionarios();
     }
 
-    public void verReserva(MouseEvent mouseEvent) {
-    }
+
+
     //------------------------------------------------------------------------------------------------
 
 }

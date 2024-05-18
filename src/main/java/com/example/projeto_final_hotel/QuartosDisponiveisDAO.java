@@ -23,6 +23,7 @@ public class QuartosDisponiveisDAO {
             double preco = rs.getDouble("preco");
             QuartosDisponiveis q = new QuartosDisponiveis(idQuarto, numQuarto, tipoDeQuarto, status, preco);
             quartosdisponiveis.add(q);
+
         }
     }
     catch(SQLException ex){

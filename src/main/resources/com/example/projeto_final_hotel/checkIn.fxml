@@ -65,12 +65,12 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="telefoneCheckIn" layoutX="213.0" layoutY="120.0" style="-fx-background-color: #fff; -fx-background-radius: 8; -fx-border-color: #444857; -fx-border-radius: 2; -fx-border-width: 0.0.0.8;" />
-                                    <Label layoutX="184.0" layoutY="167.0" prefHeight="15.0" prefWidth="45.0" text="morada">
+                                    <Label layoutX="184.0" layoutY="167.0" prefHeight="15.0" prefWidth="45.0" text="E-mail">
                                        <font>
                                           <Font name="Georgia" size="12.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="moradacheckIn" layoutX="132.0" layoutY="182.0" style="-fx-background-color: #fff; -fx-background-radius: 8; -fx-border-color: #444857; -fx-border-radius: 2; -fx-border-width: 0.0.0.8;" />
+                                    <TextField fx:id="emailcheckIn" layoutX="132.0" layoutY="182.0" style="-fx-background-color: #fff; -fx-background-radius: 8; -fx-border-color: #444857; -fx-border-radius: 2; -fx-border-width: 0.0.0.8;" />
                                     <DatePicker fx:id="dataEntradaCheckIn" layoutX="33.0" layoutY="357.0" prefHeight="25.0" prefWidth="142.0" style="-fx-border-color: #444857;" />
                                     <DatePicker fx:id="dataSaidaCheckIn" layoutX="219.0" layoutY="357.0" prefHeight="25.0" prefWidth="138.0" style="-fx-border-color: #444857;" />
                                     <Label layoutX="30.0" layoutY="324.0" prefHeight="15.0" prefWidth="98.0" text="Data Entrada">
@@ -91,7 +91,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="checkInBtn" layoutX="240.0" layoutY="435.0" mnemonicParsing="false" onAction="#buttonResetOnAction" onMouseEntered="#btnResetEntered" onMouseExited="#btnResetExited" prefHeight="31.0" prefWidth="95.0" style="-fx-border-width: 0.0.0.8; -fx-border-radius: 2; -fx-background-radius: 8; -fx-background-color: #263F73; -fx-font-family: tahoma;" text="Check-In" textFill="WHITE">
+                                    <Button fx:id="checkInBtn" layoutX="240.0" layoutY="435.0" mnemonicParsing="false" onAction="#buttonAddOnAction" onMouseEntered="#btnResetEntered" onMouseExited="#btnResetExited" prefHeight="31.0" prefWidth="95.0" style="-fx-border-width: 0.0.0.8; -fx-border-radius: 2; -fx-background-radius: 8; -fx-background-color: #263F73; -fx-font-family: tahoma;" text="Check-In" textFill="WHITE">
                                        <font>
                                           <Font name="Comic Sans MS Bold" size="13.0" />
                                        </font>
@@ -99,8 +99,8 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <ComboBox fx:id="roomTypeCheckIn" layoutX="29.0" layoutY="262.0" prefWidth="150.0" style="-fx-background-color: #fff; -fx-border-width: 1.5; -fx-background-radius: 5; -fx-border-color: #444857;" />
-                                    <ComboBox fx:id="roomNumberCheckIn" layoutX="213.0" layoutY="262.0" prefWidth="150.0" style="-fx-background-color: #fff; -fx-border-width: 1.5; -fx-background-radius: 5; -fx-border-color: #444857;" />
+                                    <ComboBox fx:id="roomTypeCheckIn" layoutX="29.0" layoutY="262.0" onAction="#roomTypeList" prefWidth="150.0" style="-fx-background-color: #fff; -fx-border-width: 1.5; -fx-background-radius: 5; -fx-border-color: #444857;" />
+                                    <ComboBox fx:id="roomNumberCheckIn" layoutX="213.0" layoutY="262.0" onAction="#roomNumberList" prefWidth="150.0" style="-fx-background-color: #fff; -fx-border-width: 1.5; -fx-background-radius: 5; -fx-border-color: #444857;" />
                                     <Label layoutX="38.0" layoutY="234.0" prefHeight="15.0" prefWidth="98.0" text="Tipo de Quarto">
                                        <font>
                                           <Font name="Georgia" size="12.0" />
