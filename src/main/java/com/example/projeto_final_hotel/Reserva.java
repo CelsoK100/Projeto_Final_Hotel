@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.IdentityHashMap;
 
 public class Reserva {
+    //Atributos da Classe Reserva
     private int idReserva;
     private String nome;
     private String telefone;
@@ -14,12 +15,16 @@ public class Reserva {
     private int numQuarto;
     private String tipo;
 
+    //Método construtor com apenas o id
     public Reserva(int idReserva){
         this.idReserva = idReserva;
     }
+
+    //Método construtor vazio
     public Reserva(){
     }
 
+    //Método construtor com todos os atributos da classe
     public Reserva(int idReserva,int numQuarto, String tipo, String nome, String telefone, String email, LocalDate dataEntrada, LocalDate dataSaida) {
         this.idReserva = idReserva;
         this.nome = nome;
@@ -31,15 +36,9 @@ public class Reserva {
         this.tipo = tipo;
     }
 
-    public Reserva(int idReserva,String nome, String telefone, String email, LocalDate dataEntrada, LocalDate dataSaida) {
-        this.idReserva = idReserva;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-        this.dataEntrada = dataEntrada;
-        this.dataSaida = dataSaida;
-    }
 
+
+    //Método construtor sem o id
     public Reserva(String nome, String telefone, String email, LocalDate dataEntrada, LocalDate dataSaida) {
         this.nome = nome;
         this.telefone = telefone;
@@ -48,6 +47,7 @@ public class Reserva {
         this.dataSaida = dataSaida;
     }
 
+    //Métodos getters e setters da classe reserva menos o id que tem somente o getter.serveem para obter e alterar os valores.
     public int getIdReserva() {
         return idReserva;
     }
@@ -91,5 +91,21 @@ public class Reserva {
 
     public void setDataSaida(LocalDate dataSaida) {
         this.dataSaida = dataSaida;
+    }
+
+    public int getNumQuarto() {
+        return numQuarto;
+    }
+
+    public void setNumQuarto(int numQuarto) {
+        this.numQuarto = numQuarto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

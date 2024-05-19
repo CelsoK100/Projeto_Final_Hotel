@@ -118,7 +118,7 @@
                             <center>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                     <children>
-                                        <AnchorPane fx:id="QuartosDisponiveisForm" prefHeight="538.0" prefWidth="901.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <AnchorPane fx:id="QuartosDisponiveisForm" prefHeight="538.0" prefWidth="901.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
                                                 <AnchorPane layoutX="14.0" layoutY="13.0" prefHeight="602.0" prefWidth="290.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">
                                                     <children>
@@ -207,11 +207,11 @@
                                                     <children>
                                                         <TableView fx:id="tableViewQuartos" layoutX="7.0" layoutY="54.0" onMouseClicked="#verQuartos" prefHeight="547.0" prefWidth="671.0" style="-fx-background-color: #0367fc; -fx-padding: 2; -fx-border-color: #0367fc; -fx-border-radius: 8; -fx-background-radius: 10;">
                                                             <columns>
-                                                <TableColumn fx:id="roomIdNumberCollum" prefWidth="82.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="IdQuarto" />
-                                                                <TableColumn fx:id="roomNumberCollum" prefWidth="109.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="N º Quarto" />
-                                                                <TableColumn fx:id="roomTypeCollum" prefWidth="158.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="Tipo de quarto" />
-                                                                <TableColumn fx:id="roomStatusCollum" minWidth="0.0" prefWidth="131.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="Status" />
-                                                                <TableColumn fx:id="roomPriceCollum" prefWidth="186.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="preço" />
+                                                <TableColumn fx:id="roomIdNumberCollum" prefWidth="82.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="IdQuarto" />
+                                                                <TableColumn fx:id="roomNumberCollum" prefWidth="109.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="N º Quarto" />
+                                                                <TableColumn fx:id="roomTypeCollum" prefWidth="158.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="Tipo de quarto" />
+                                                                <TableColumn fx:id="roomStatusCollum" minWidth="0.0" prefWidth="131.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="Status" />
+                                                                <TableColumn fx:id="roomPriceCollum" prefWidth="186.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="preço" />
                                                             </columns>
                                                             <effect>
                                                                 <DropShadow />
@@ -227,7 +227,6 @@
                                                                 <Image url="@image/png-transparent-magnifying-glass-magnification-magnifying-glass-glass-logo-light-removebg-preview.png" />
                                                             </image>
                                                         </ImageView>
-                                          <Button fx:id="BtnAtualizarBD" layoutX="452.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#btnUpdateClicked" text="Atualizar" />
                                                     </children>
                                                 </AnchorPane>
                                             </children>
@@ -249,7 +248,7 @@
                                                                 <Font name="Comic Sans MS Bold" size="13.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label layoutX="75.0" layoutY="183.0" text="Idade:">
+                                                        <Label layoutX="10.0" layoutY="185.0" text="Data Nascimento:">
                                                             <font>
                                                                 <Font name="Comic Sans MS Bold" size="13.0" />
                                                             </font>
@@ -318,11 +317,11 @@
                                                     <children>
                                                         <TableView fx:id="tableViewFuncionarios" layoutX="10.0" layoutY="53.0" onMouseClicked="#verFuncionario" prefHeight="539.0" prefWidth="659.0" style="-fx-background-color: #0367fc; -fx-background-radius: 10;">
                                                             <columns>
-                                                                <TableColumn fx:id="FuncionarioIdColumm" prefWidth="83.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -text-fill: center;" text="ID " />
-                                                                <TableColumn fx:id="FuncionarioFirstNameColumm" prefWidth="147.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="primeiro nome" />
-                                                                <TableColumn fx:id="FuncionarioSecondNameColumm" prefWidth="132.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="Segundo nome" />
-                                                                <TableColumn fx:id="FuncionarioAgeColumm" prefWidth="147.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="idade" />
-                                                                <TableColumn fx:id="FuncionarioCargoColumm" prefWidth="149.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8;" text="Cargo" />
+                                                                <TableColumn fx:id="FuncionarioIdColumm" prefWidth="83.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="ID " />
+                                                                <TableColumn fx:id="FuncionarioFirstNameColumm" prefWidth="147.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="primeiro nome" />
+                                                                <TableColumn fx:id="FuncionarioSecondNameColumm" prefWidth="132.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="Segundo nome" />
+                                                                <TableColumn fx:id="FuncionarioAgeColumm" prefWidth="147.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="Data de nascimento" />
+                                                                <TableColumn fx:id="FuncionarioCargoColumm" prefWidth="149.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="Cargo" />
                                                             </columns>
                                                             <effect>
                                                                 <DropShadow />
@@ -342,28 +341,30 @@
                                             <children>
                                                 <AnchorPane layoutX="1.0" prefHeight="612.0" prefWidth="1177.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-51.0" AnchorPane.topAnchor="0.0">
                                                     <children>
-                                                        <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="609.0" prefWidth="969.0" style="-fx-background-color: fff; -fx-background-radius: 10;">
+                                                        <AnchorPane layoutX="14.0" layoutY="7.0" prefHeight="609.0" prefWidth="969.0" style="-fx-background-color: fff; -fx-background-radius: 10;">
                                                             <effect>
                                                                 <DropShadow />
                                                             </effect>
                                                             <children>
-                                                                <TableView fx:id="ReservaTableView" layoutX="14.0" layoutY="45.0" prefHeight="548.0" prefWidth="939.0" style="-fx-border-color: #0367fc; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: #0367fc;">
+                                                                <TableView fx:id="ReservaTableView" layoutX="14.0" layoutY="45.0" onMousePressed="#verReserva" prefHeight="548.0" prefWidth="939.0" style="-fx-border-color: #0367fc; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: #0367fc;">
                                                                     <columns>
-                                                                        <TableColumn fx:id="IDReservaCollumn" prefWidth="105.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-text-fill: white;" text="ID Reserva" />
-                                                                        <TableColumn fx:id="NomeReservaCollumn" prefWidth="112.0" style="-fx-background-color: #0367fc; -fx-background-radius: 8; -fx-border-color: #0367fc; -fx-border-width: 8;" text="Nome" />
-                                                                        <TableColumn fx:id="NumberPhoneReservaCollumn" prefWidth="162.0" style="-fx-background-color: #0367fc; -fx-background-radius: 8; -fx-border-color: #0367fc; -fx-border-width: 8;" text="telefone" />
-                                                                        <TableColumn fx:id="EmailReservaCollumn" prefWidth="172.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8;" text="Email" />
-                                                                        <TableColumn fx:id="CheckInReservaCollumn" prefWidth="201.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8;" text="Check-In" />
-                                                                        <TableColumn fx:id="CheckOutReservaCollumn" prefWidth="185.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8;" text="Check-Out" />
+                                                                        <TableColumn fx:id="IDReservaCollumn" prefWidth="91.0" style="-fx-background-radius: 8; -fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="ID Reserva" />
+                                                      <TableColumn fx:id="numQuartoReservaTableColumn" prefWidth="87.0" style="-fx-background-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8; -fx-border-color: #0367fc; -fx-alignment: center;" text="numQuarto" />
+                                                      <TableColumn fx:id="tipoQuartoReservaTableColumn" prefWidth="129.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8; -fx-alignment: center;" text="tipo " />
+                                                                        <TableColumn fx:id="NomeReservaCollumn" prefWidth="125.0" style="-fx-background-color: #0367fc; -fx-background-radius: 8; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="Nome" />
+                                                                        <TableColumn fx:id="NumberPhoneReservaCollumn" minWidth="0.0" prefWidth="138.0" style="-fx-background-color: #0367fc; -fx-background-radius: 8; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-alignment: center;" text="telefone" />
+                                                                        <TableColumn fx:id="EmailReservaCollumn" minWidth="0.0" prefWidth="139.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8; -fx-alignment: center;" text="Email" />
+                                                                        <TableColumn fx:id="CheckInReservaCollumn" prefWidth="110.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8; -fx-alignment: center;" text="Check-In" />
+                                                                        <TableColumn fx:id="CheckOutReservaCollumn" minWidth="0.0" prefWidth="118.0" style="-fx-background-color: #0367fc; -fx-border-color: #0367fc; -fx-border-width: 8; -fx-background-radius: 8; -fx-alignment: center;" text="Check-Out" />
                                                                     </columns>
                                                                 </TableView>
-                                                                <TextField fx:id="searchClient" layoutX="17.0" layoutY="13.0" onKeyPressed="#procurarReserva" prefHeight="25.0" prefWidth="319.0" promptText="Procurar" />
+                                                                <TextField fx:id="searchReserva" layoutX="17.0" layoutY="13.0" onKeyPressed="#procurarReserva" prefHeight="25.0" prefWidth="319.0" promptText="Procurar" />
                                                                 <ImageView fitHeight="28.0" fitWidth="34.0" layoutX="298.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
                                                                         <Image url="@image/png-transparent-magnifying-glass-magnification-magnifying-glass-glass-logo-light-removebg-preview.png" />
                                                                     </image>
                                                                 </ImageView>
-                                                                <Button fx:id="deleteReservaBtn" layoutX="623.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonDeleteReservaOnAction" onMouseEntered="#btnDeleteReservaEntered" onMouseExited="#btnDeleteReservaExited" prefHeight="31.0" prefWidth="95.0" style="-fx-border-width: 0.0.0.8; -fx-border-radius: 2; -fx-background-radius: 8; -fx-background-color: #263F73; -fx-font-family: tahoma;" text="Eliminar" textFill="WHITE">
+                                                                <Button fx:id="deleteReservaBtn" layoutX="678.0" layoutY="11.0" mnemonicParsing="false" onAction="#buttonDeleteReservaOnAction" onMouseEntered="#btnDeleteReservaEntered" onMouseExited="#btnDeleteReservaExited" prefHeight="31.0" prefWidth="95.0" style="-fx-border-width: 0.0.0.8; -fx-border-radius: 2; -fx-background-radius: 8; -fx-background-color: #263F73; -fx-font-family: tahoma;" text="Eliminar" textFill="WHITE">
                                                                     <font>
                                                                         <Font name="Comic Sans MS Bold" size="13.0" />
                                                                     </font>
@@ -371,6 +372,14 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                     </cursor>
                                                                 </Button>
+                                                <TextField fx:id="idCheckIn" layoutX="348.0" layoutY="13.0" prefHeight="25.0" prefWidth="6.0" style="-fx-background-color: fff;" />
+                                                <TextField fx:id="nomeCheckIn" layoutX="405.0" layoutY="13.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: fff;" />
+                                                <TextField fx:id="telefoneCheckIn" layoutX="393.0" layoutY="13.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: fff;" />
+                                                <DatePicker fx:id="dataEntradaCheckIn" layoutX="555.0" layoutY="13.0" prefHeight="25.0" prefWidth="20.0" style="-fx-background-color: fff; -fx-border-color: fff;" visible="false" />
+                                                <DatePicker fx:id="dataSaidaCheckIn" editable="false" layoutX="615.0" layoutY="12.0" prefHeight="25.0" prefWidth="20.0" style="-fx-background-color: fff; -fx-border-color: fff;" visible="false" />
+                                                <TextField fx:id="emailCheckIn" layoutX="412.0" layoutY="13.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: fff;" />
+                                                <TextField fx:id="roomNumberCheckIn" layoutX="615.0" layoutY="13.0" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: fff;" visible="false" />
+                                                <TextField fx:id="roomTypeCheckIn" layoutX="658.0" layoutY="13.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: fff;" visible="false" />
                                                             </children>
                                                         </AnchorPane>
                                                     </children>
