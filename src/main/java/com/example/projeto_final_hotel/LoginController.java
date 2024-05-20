@@ -94,7 +94,7 @@ public class LoginController {
                     // Cria uma nova cena com o layout carregado
                     Stage stage = new Stage();
                     Scene scene = new Scene(parent);
-
+                    stage.initStyle(StageStyle.UNDECORATED);
                     // Define a nova cena na janela e exibe-a
                     stage.setScene(scene);
                     stage.show();

@@ -1392,15 +1392,20 @@ public class PrincipalController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("CONFIRMAÇÃO");
         alert.setHeaderText("Deseja realmente sair?");
-        alert.setContentText(null);
-        alert.showAndWait();
+        ButtonType btnSim = new ButtonType("SIM");
+        ButtonType btnNao = new ButtonType("NÃO");
+        alert.getButtonTypes().setAll(btnSim, btnNao);
 
-        Alert alertSair = new Alert(Alert.AlertType.INFORMATION);
-        alertSair.setTitle("INFORMAÇÃO");
-        alertSair.setHeaderText("OBRIGADO POR TER VIDO!!");
-        alertSair.setContentText(null);
-        alertSair.showAndWait();
-        stage.close();
+        alert.showAndWait().ifPresent(btnSair ->{
+           if(btnSair == btnSim){
+               Alert alertSair = new Alert(Alert.AlertType.INFORMATION);
+               alertSair.setTitle("INFORMAÇÃO");
+               alertSair.setHeaderText("OBRIGADO POR TER VIDO!!");
+               alertSair.setContentText(null);
+               alertSair.showAndWait();
+               stage.close();
+           }
+        });
 
     }
     @Override
